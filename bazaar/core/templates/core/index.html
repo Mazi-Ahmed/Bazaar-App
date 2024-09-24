@@ -3,41 +3,42 @@
 {% block title %}Buy & Sell Locally{% endblock %}
 
 {% block content %}
-    <div class="mt-6 px-6 py-12 bg-blue-100 rounded-xl">
-        <h2 class="mb-12 text-2xl text-center">Recently Posted</h2>
 
-        <div class="grid grid-cols-3 gap-3">
-            {% for product in products %}
-                <div class="product-card">
-                    <a href="{% url 'product:detail' product.id %}">
-                        <div class="image-container">
-                            <img src="{{ product.image.url }}" class="product-image rounded-t-xl">
-                        </div>
+<div class="mt-6 px-6 py-12 bg-blue-100 rounded-xl">
+    <h2 class="mb-12 text-2xl text-center">Categories</h2>
 
-                        <div class="p-6 bg-white rounded-b-xl">
-                            <h3 class="text-2xl">{{ product.name }}</h3>
-                            <p class="text gray-500">Price: ${{ product.price }}0</p>
-                        </div>
-                    </a>
+    <div class="grid grid-cols-3 gap-3">
+        {% for category in categories %}
+        <div>
+            <a href="#">
+                <div class="p-6 bg-white rounded-b-xl">
+                    <h3 class="text-2xl">{{ category.name }}</h3>
+                    <p class="text gray-500">{{ category.products.count }} products</p>
                 </div>
-            {% endfor %}
+            </a>
         </div>
+        {% endfor %}
     </div>
+</div>
 
-    <div class="mt-6 px-6 py-12 bg-blue-100 rounded-xl">
-        <h2 class="mb-12 text-2xl text-center">Categories</h2>
+<div class="mt-6 px-6 py-12 bg-blue-100 rounded-xl">
+    <h2 class="mb-12 text-2xl text-center">Recently Posted</h2>
 
-        <div class="grid grid-cols-3 gap-3">
-            {% for category in categories %}
-            <div>
-                <a href="#">
-                    <div class="p-6 bg-white rounded-b-xl">
-                        <h3 class="text-2xl">{{ category.name }}</h3>
-                        <p class="text gray-500">{{ category.products.count }} products</p>
-                    </div>
-                </a>
-            </div>
-            {% endfor %}
+    <div class="grid grid-cols-3 gap-3">
+        {% for product in products %}
+        <div class="product-card">
+            <a href="{% url 'product:detail' product.id %}">
+                <div class="image-container">
+                    <img src="{{ product.image.url }}" class="product-image rounded-t-xl">
+                </div>
+
+                <div class="p-6 bg-white rounded-b-xl">
+                    <h3 class="text-2xl">{{ product.name }}</h3>
+                    <p class="text gray-500">Price: ${{ product.price }}0</p>
+                </div>
+            </a>
         </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}
