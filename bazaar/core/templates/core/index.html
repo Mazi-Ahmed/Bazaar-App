@@ -17,25 +17,25 @@
 
 
 <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
-    <h2 class="mb-12 text-2xl font-semibold">Today's picks</h2>
+    <h2 class="mb-6 text-2xl font-semibold">Today's Picks</h2>
 
-    <div class="grid grid-cols-3 gap-3">
-        {% for product in products %}
-        <div class="product-card">
-            <a href="{% url 'product:detail' product.id %}">
-                <div class="image-container">
-                    <img src="{{ product.image.url }}" class="product-image rounded-t-xl">
-                </div>
-
-                <div class="p-6 bg-white rounded-b-xl">
-                    <h3 class="text-2xl">{{ product.name }}</h3>
-                    <p class="text gray-500">Price: ${{ product.price }}0</p>
-                </div>
-            </a>
+    <div class="overflow-x-auto">
+        <div class="flex space-x-4">
+            {% for product in products %}
+            <div class="flex-shrink-0 w-40">
+                <a href="{% url 'product:detail' product.id %}">
+                    <img src="{{ product.image.url }}" class="w-full h-32 rounded-xl object-cover">
+                    <div class="mt-2 text-center">
+                        <h3 class="text-lg font-semibold">{{ product.name }}</h3>
+                        <p class="text-gray-500">${{ product.price }}0</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
+
 
 <div class="mt-1 px-3 py-10 rounded-xl">
     <div class="grid grid-cols-10 gap-3">
