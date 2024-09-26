@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
+    icon_class = models.CharField(max_length=255, blank=True, null=True)
+    
     class Meta:
         ordering = ('name',)
         verbose_name_plural = 'Categories'
