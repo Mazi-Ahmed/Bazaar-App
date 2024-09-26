@@ -4,23 +4,20 @@
 
 {% block content %}
 
-<div class="mt-1 px-3 py-10 rounded-xl">
-    <div class="grid grid-cols-10 gap-3">
-        {% for category in categories %}
-        <div>
-            <a href="#">
-                <div class="p-3 bg-white text-center rounded-xl transition duration-200 hover:bg-gray-100">
-                    <i class="{{ category.icon_class }} text-2xl mb-2" style="color: #454ade;"></i>
-                    <h3 class="text-l">{{ category.name }}</h3>
-                </div>
-            </a>
-        </div>
-        {% endfor %}
+<div class="flex items-center justify-center">
+    <div>
+        <h1 class="text-7xl font-bold">
+            Buy.Sell.<br>
+            <span class="text-[#454ade]">Deliver.</span>
+        </h1>
+        <h3 class="mt-2">All in your local neighborhood.</h3>
     </div>
+    <img src="{% static 'images/handshake.png' %}" alt="Handshake" class="h-44 ml-6">
 </div>
 
-<div class="mt-6 px-6 py-12 bg-blue-100 rounded-xl">
-    <h2 class="mb-12 text-2xl text-center">Recently Posted</h2>
+
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+    <h2 class="mb-12 text-2xl font-semibold">Today's picks</h2>
 
     <div class="grid grid-cols-3 gap-3">
         {% for product in products %}
@@ -39,4 +36,20 @@
         {% endfor %}
     </div>
 </div>
+
+<div class="mt-1 px-3 py-10 rounded-xl">
+    <div class="grid grid-cols-10 gap-3">
+        {% for category in categories %}
+        <div>
+            <a href="#">
+                <div class="p-3 bg-white text-center rounded-xl transition duration-200 hover:bg-gray-100">
+                    <i class="{{ category.icon_class }} text-2xl mb-2" style="color: #454ade;"></i>
+                    <h3 class="text-l">{{ category.name }}</h3>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock %}

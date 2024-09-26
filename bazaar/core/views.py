@@ -26,3 +26,18 @@ def signup(request):
     return render(request, 'core/signup.html', {
         'form':form
     })
+
+def home_view(request):
+    return render(request, 'core/base.html', {
+        'active_page': 'home'  
+    })
+
+def products_view(request):
+    return render(request, 'core/base.html', {
+        'active_page': 'products'  
+    })
+
+def new_product_view(request):
+    return render(request, 'core/base.html', {
+        'active_page': 'new' 
+    })
