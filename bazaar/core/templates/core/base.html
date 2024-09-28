@@ -14,7 +14,7 @@
     </head>
 
     <body>
-        <nav class="py-3 px-6 flex items-center border-b border-gray-200 shadow-md">
+        <nav class="py-2 px-6 flex items-center border-b border-gray-200 shadow-md">
             <div class="flex items-center">
             <a href="/">
                 <img src="{% static 'images/bazaar app title.png' %}" alt="Bazaar Logo" class="h-5">
@@ -54,11 +54,12 @@
             </div>
         </nav>
 
-        <div class="px-6 py-3">
+        <div>
             {% block content %}
             {% endblock %}
         </div>
 
+        {% block footer %}
         <footer class="py-6 px-6 flex justify-between bg-gray-100">
             <div class="w-2/4 pr-10">
                 <a href="/">
@@ -78,5 +79,6 @@
                 </ul>
             </div>
         </footer>
+        {% endblock %}
     </body>
 </html>

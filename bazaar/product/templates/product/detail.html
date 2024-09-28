@@ -3,19 +3,17 @@
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block content %}
-<div class="grid grid-cols-5 gap-6">
+<div class="grid grid-cols-4 gap-2">
     <div class="col-span-3">
         <img src="{{ product.image.url }}" class="rounded-xl w-full">
     </div>
-    <div class="col-span-2 p-6 bg-gray-100 rounded-xl">
-        <h2 class="mb-6 text-3xl">{{ product.name }}</h2>
-        <p class="text-black-500">Price: ${{ product.price }}0</p>
-        <p class="text-black-500">Sold by {{ product.created_by }}</p>
-
-        {% if product.description %}
-        <p class="text-black-700">Description:<br>{{ product.description }}</p>
-        {% endif %}
-
+    <div class="col-span-1 p-4 bg-gray-100 rounded-xl">
+        <div class="mb-2">
+            <h2 class="font-bold text-3xl">{{ product.name }}</h2>
+            <h3 class="font-semibold text-lg text-black-500">${{ product.price }}0</h3>
+        </div>
+        
+        
         {% if request.user == product.created_by %}
             <div class="mt-6 p-6 bg-white rounded-xl">
                 <p>Your Listing</p>
@@ -23,13 +21,26 @@
                 <a href="{% url 'product:delete' product.id %}" class="inline-block mt-3 px-2 py-2 text-lg font-semibold bg-red-500 text-white rounded-xl">Delete</a>
             </div>
         {% else %}
-            <a href="#" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Buy</a>
-            <a href="#" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Pick Up</a>
-            <a href="{% url 'dialogue:new' product.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-blue-500 text-white rounded-xl hover:bg-blue-700">Chat</a>
+            <a href="{% url 'dialogue:new' product.id %}" class="inline-block mt-6 px-8 py-3 font-semibold bg-gray-300 text-black rounded-xl hover:bg-gray-400">
+                Chat <i class="fa-solid fa-message"></i>
+            </a>
+            <a href="#" class="inline-block mt-6 px-4 py-3 font-semibold bg-gray-300 text-black rounded-xl hover:bg-gray-400">
+                <i class="fa-regular fa-heart"></i>
+            </a>
+            <a href="#" class="inline-block mt-6 px-4 py-3 font-semibold bg-gray-300 text-black rounded-xl hover:bg-gray-400">
+                <i class="fa-solid fa-share"></i>
+            </a>
+            <a href="#" class="inline-block mt-6 px-12 py-3 font-semibold bg-indigo-400 text-white rounded-xl hover:bg-indigo-500">Deliver</a>
         {% endif %}
+
+        {% if product.description %}
+        <h3 class="mt-6 font-semibold text-xl">Details</h3>
+        <p class="text-gray-600">{{ product.description }}</p>
+        {% endif %}
+    </div>
 </div>
 
-<div class="mt-12 px-6 py-12 bg-blue-100 rounded-xl">
+<!-- <div class="mt-12 px-6 py-12 bg-blue-100 rounded-xl">
     <h2 class="mb-12 text-2xl text-center">Similar Items</h2>
 
     <div class="grid grid-cols-3 gap-6">
@@ -39,11 +50,11 @@
                         <img src="{{ product.image.url }}" class="rounded-t-xl w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-2xl font-semibold">{{ product.name }}</h3>
-                        <p class="text gray-500">Price: ${{ product.price }}0</p>
+                        <p class="text gray-500">${{ product.price }}0</p>
                     </div>
                 </a>
             </div>
         {% endfor %}
     </div>
-</div>
+</div> -->
 {% endblock %}

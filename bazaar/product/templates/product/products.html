@@ -3,44 +3,51 @@
 {% block title %}Browse{% endblock %}
 
 {% block content %}
-    <div class="pb-6 grid grid-cols-4 gap-4 bg-gray-100">
-        <div class="col-span-1">
+<div class="grid grid-cols-4 gap-4 bg-gray-100">
+    <div class="col-span-1 pl-0">
+        <div class="bg-white px-4 py-3">
             <form method="get" action="{% url 'product:products' %}">
-                <input name="query" class="w-full py-3 px-4 border rounded-xl" type="text" value="{{ query }}" placeholder="Search Bazaar"> 
-                <button class="mt-2 py-2 px-4 text-lg bg-blue-500 text-white rounded-xl">Search</button>
+                <input name="query" class="w-full py-2 px-4 border bg-gray-100 rounded-xl" type="text" value="{{ query }}" placeholder="Search Bazaar">
             </form>
+        </div>
+        <div class="bg-white px-4 shadow-lg overflow-y-auto">
             <hr class="my-6">
-            <p class="font-bold">Categories</p>
+            <div class="flex justify-between items-center">
+                <p class="font-bold">Categories</p>
+                <a href="{% url 'product:products' %}"><i class="fa-solid fa-circle-left text-xl" style="color:#454ADE"></i></a>
+            </div>
             <ul>
                 {% for category in categories %}
-                    <li class="py-1 px-1 rounded-xl{% if category.id == category_id %} bg-blue-100 {% endif %}">
-                        <a href="{% url 'product:products' %}?query={{ query }}&category={{ category.id}}">{{ category.name }}</a>
-                    </li>
+                <li class="py-1 px-1 rounded-xl hover:bg-gray-200{% if category.id == category_id %} bg-blue-100 {% endif %}">
+                    <a href="{% url 'product:products' %}?query={{ query }}&category={{ category.id }}">
+                        <i class="{{ category.icon_class }} m-4" style="color:#454ADE"></i> {{ category.name }}
+                    </a>
+                </li>
                 {% endfor %}
             </ul>
             <hr class="my-6">
-            <p class="font-bold">Clear Filter</p>
-            <ul>
-                <li><a href="{% url 'product:products' %}" class="mt-1 py-2 px-4 inline-block bg-orange-500 text-lg rounded-xl text-white">Clear</a></li>
-            </ul>
-        </div>
-        <div class="col-span-3">
-            <div class="grid grid-cols-3 gap-3">
-                {% for product in products %}
-                    <div class="product-card">
-                        <a href="{% url 'product:detail' product.id %}">
-                            <div class="image-container">
-                                <img src="{{ product.image.url }}" class="product-image rounded-t-xl">
-                            </div>
-    
-                            <div class="p-6 bg-white rounded-b-xl">
-                                <h3 class="text-2xl">{{ product.name }}</h3>
-                                <p class="text gray-500">Price: ${{ product.price }}0</p>
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
         </div>
     </div>
+
+
+    <div class="col-span-3">
+        <h2 class="text-xl font-semibold m-6">Today's Listings</h2>
+        <div class="grid grid-cols-4 gap-4">
+            {% for product in products %}
+            <div class="product-card">
+                <a href="{% url 'product:detail' product.id %}">
+                    <div class="image-container">
+                        <img src="{{ product.image.url }}" class="product-image rounded-xl">
+                    </div>
+                    <div class="p-4 bg-transparent">
+                        <h3 class="text-lg font-semibold text-gray-800">${{ product.price }}0</h3>
+                        <p>{{ product.name }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% block footer %}{% endblock %}
 {% endblock %}
