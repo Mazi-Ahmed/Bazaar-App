@@ -43,7 +43,7 @@ def new(request):
         form = NewProduct()
     return render(request, 'product/form.html', {
         'form': form,
-        'title': 'New Product'
+        'title': 'Create new listing'
     })
 
 @login_required

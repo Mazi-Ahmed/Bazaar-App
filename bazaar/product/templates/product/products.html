@@ -32,14 +32,14 @@
 
     <div class="col-span-3">
         <h2 class="text-xl font-semibold m-6">Today's Listings</h2>
-        <div class="grid grid-cols-4 gap-4">
+        <div class="grid grid-cols-4 gap-2">
             {% for product in products %}
-            <div class="product-card">
+            <div class="product-card border border-gray-300 rounded-lg p-2">
                 <a href="{% url 'product:detail' product.id %}">
                     <div class="image-container">
-                        <img src="{{ product.image.url }}" class="product-image rounded-xl">
+                        <img src="{{ product.image.url }}" class="border product-image rounded-lg">
                     </div>
-                    <div class="p-4 bg-transparent">
+                    <div class="p-2 bg-transparent">
                         <h3 class="text-lg font-semibold text-gray-800">${{ product.price }}0</h3>
                         <p>{{ product.name }}</p>
                     </div>

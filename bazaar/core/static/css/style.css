@@ -18,3 +18,12 @@
     border-radius: 8px;
     overflow: hidden;
 }
+
+body.dark-mode {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode a {
+    color: #bb86fc; 
+}
