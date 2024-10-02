@@ -3,21 +3,35 @@
 {% block title %}Message{% endblock %}
 
 {% block content %}
-<h1 class="mb-6 text-3xl">Message</h1>
-<div class="space-y-6">
-    {% for dm_messages in dialogue.dm_messages.all %}
-    <div class="p-6 flex {% if dm_messages.created_dialogue == request.user %}bg-blue-100{% else %}bg-gray-100{% endif %} rounded-xl">
-        <div>
-            <p class="mb-4"><strong>{{ dm_messages.created_dialogue.username }}</strong> @ {{ dm_messages.date_of }}</p>
-            <p>{{ dm_messages.content }}</p>
+<div class="container mx-auto px-4 py-6">
+    <h1 class="mb-6 text-3xl font-bold">Messages</h1>
+
+    <div class="flex justify-center mb-4">
+        <div class="bg-white border rounded-lg shadow-lg p-4 w-48">
+                <img src="{{ dialogue.product.images.first.image.url }}" class="w-full h-24 object-cover rounded-lg mb-2" alt="{{ dialogue.product.name }}">
+            <h4 class="font-semibold text-lg">{{ dialogue.product.name }}</h4>
         </div>
     </div>
-    {% endfor %}
-</div>
-<form method="post" action="." class="mt-6">
-    {% csrf_token %}
 
-    {{ form.as_p }}
-    <button class="py-2 px-4 text-lg bg-blue-500 hover:bg-blue-700 rounded-xl text-white">Send</button>
-</form>
+    <div class="space-y-4">
+        {% for dm_messages in dialogue.dm_messages.all %}
+        <div class="flex {% if dm_messages.created_dialogue == request.user %}justify-end{% else %}justify-start{% endif %}">
+            <div class="max-w-xs p-4 rounded-lg {% if dm_messages.created_dialogue == request.user %}bg-indigo-100 text-right{% else %}bg-gray-100{% endif %}">
+                <p class="font-semibold">{{ dm_messages.created_dialogue.username }} <span class="text-gray-500 text-xs">@ {{ dm_messages.date_of|date:"F j, Y, g:i a" }}</span></p>
+                <p class="mt-1">{{ dm_messages.content }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <form method="post" action="." class="mt-6">
+        {% csrf_token %}
+        <div class="flex">
+            <div class="flex-grow pr-2">
+                <input type="text" name="content" class="w-full p-3 border rounded-lg" placeholder="Type your message here..." required>
+            </div>
+            <button class="py-2 px-4 bg-indigo-500 hover:bg-indigo-600 bg-opacity-80 rounded-lg text-white">Send</button>
+        </div>
+    </form>
+</div>
 {% endblock %}

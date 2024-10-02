@@ -41,3 +41,4 @@ def new_product_view(request):
     return render(request, 'core/base.html', {
         'active_page': 'new' 
     })
+

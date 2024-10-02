@@ -3,24 +3,26 @@
 {% block title %}Inbox{% endblock %}
 
 {% block content %}
-<h1 class="mb-6 text-3xl">Inbox</h1>
-<div class="space-y-6">
-    {% for dialogue in dialogues %}
-        <a href="{% url 'dialogue:detail' dialogue.id %}">
-            <div class="p-6 flex bg-gray-100 rounded-xl">
-                <div class="pr-6">
-                    <img src="{{ dialogue.product.image.url }}" class="w-20 rounded-xl">
+<div class="container mx-auto px-4 py-6">
+    <h1 class="mb-6 text-4xl font-bold">Inbox</h1>
+    <div class="space-y-6">
+        {% for dialogue in dialogues %}
+        <a href="{% url 'dialogue:detail' dialogue.id %}" class="block">
+            <div class="flex items-center p-4 bg-white shadow-lg rounded-lg hover:shadow-xl transition duration-200">
+                <div class="pr-4">
+                    <img src="{{ dialogue.product.images.first.image.url }}" class="w-20 h-20 object-cover rounded-lg">
                 </div>
                 <div>
                     {% for messenger in dialogue.messengers.all %}
-                        {% if messenger != request.user %}
-                            <p class="mb-4">{{ messenger.username }} | {{ dialogue.status.date }}</p>
-                            <p>{{ dialogue.product.name }}</p>
-                        {% endif %}
+                    {% if messenger != request.user %}
+                    <p class="font-semibold">{{ messenger.username }} | <span class="text-gray-500 text-sm">{{ dialogue.status.date }}</span></p>
+                    <p class="text-lg">{{ dialogue.product.name }}</p>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>
         </a>
-    {% endfor %}
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

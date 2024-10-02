@@ -3,24 +3,34 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-    <div class="mt-6 px-6 py-12 bg-blue-100 rounded-xl">
-        <h2 class="mb-12 text-2xl text-center">My Products</h2>
+<div class="mt-6 px-6 py-12">
+    <h2 class="mb-12 text-3xl font-bold text-center">My Products</h2>
 
-        <div class="grid grid-cols-3 gap-3">
-            {% for product in products %}
-                <div class="product-card">
-                    <a href="{% url 'product:detail' product.id %}">
-                        <div class="image-container">
-                            <img src="{{ product.image.url }}" class="product-image rounded-t-xl">
-                        </div>
-
-                        <div class="p-6 bg-white rounded-b-xl">
-                            <h3 class="text-2xl">{{ product.name }}</h3>
-                            <p class="text gray-500">Price: ${{ product.price }}0</p>
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for product in products %}
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
+                <a href="{% url 'product:detail' product.id %}">
+                    <div class="relative">
+                        {% if product.images.all %}
+                            <img src="{{ product.images.first.image.url }}" 
+                                 class="w-full h-48 object-cover" 
+                                 alt="{{ product.name }}">
+                        {% else %}
+                            <img src="{% static 'default_image.jpg' %}" 
+                                 class="w-full h-48 object-cover" 
+                                 alt="Default Image">
+                        {% endif %}
+                        <div class="absolute inset-0 bg-black opacity-25"></div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold">{{ product.name }}</h3>
+                        <p class="text-gray-500">Price: ${{ product.price }}</p>
+                    </div>
+                </a>
+            </div>
+        {% empty %}
+            <p class="text-center text-gray-500">You have no products listed.</p>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}

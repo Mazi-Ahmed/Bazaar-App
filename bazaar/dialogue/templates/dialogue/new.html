@@ -3,23 +3,28 @@
 {% block title %}Contact Seller{% endblock %}
 
 {% block content %}
-<h1 class="mb-6 text-3xl">New Message</h1>
-<form method="post" action=".">
-    {% csrf_token %}
+<div class="container mx-auto px-4 py-6">
+    <h1 class="mb-6 text-3xl font-bold">Contact Seller</h1>
 
-    <div class="space-y-4">
-        {{ form.as_p }}
-    </div>
+    <form method="post" action="." class="bg-white shadow-lg rounded-lg p-6">
+        {% csrf_token %}
 
-    {% if form.errors or form.non_field_errors %}
-    <div class="mb-3 p-6 bg-red-100 rounded-xl">
-        {% for field in form %}
-            {{ field.errors }}
-        {% endfor %}
-        {{ form.non_field_errors }}
-    </div>
-    {% endif %}
-    
-    <button class="mt-6 py-2 px-4 text-lg bg-blue-500 hover:bg-blue-700 rounded-xl text-white">Send</button>
-</form>
+        <div class="space-y-4">
+            <label class="font-semibold text-lg" for="id_content">Message</label>
+            <textarea id="id_content" name="content" class="w-full border rounded-lg p-3"
+                rows="5">Is this item still available?</textarea>
+        </div>
+
+        {% if form.errors or form.non_field_errors %}
+        <div class="mb-3 p-4 bg-red-100 rounded-xl text-red-600">
+            {% for field in form %}
+                {{ field.errors }}
+            {% endfor %}
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+
+        <button class="py-2 px-4 bg-indigo-500 hover:bg-indigo-600 bg-opacity-80 rounded-lg text-white">Send</button>
+    </form>
+</div>
 {% endblock %}
