@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -12,9 +13,6 @@ def products(request):
     products = Product.objects.filter(item_sold=False)
     free_products = Product.objects.filter(price=0, item_sold=False)
 
-    print(f"Total products: {products.count()}")
-    print(f"Free products count: {free_products.count()}")
-    
     if category_id:
         products = products.filter(category_id=category_id)
     if query:
@@ -35,7 +33,8 @@ def detail(request, pk):
     return render(request, 'product/detail.html', {
         'product': product,
         'images': images,
-        'similar_products': similar_products
+        'similar_products': similar_products,
+        'GOOGLE_MAPS_API_KEY': settings.GOOGLE_MAPS_API_KEY
     })
 @login_required
 def new(request):
@@ -109,10 +108,10 @@ def edit(request, pk):
 @login_required
 def delivery(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    return render(request, 'product/delivery.html', {'product':product})
-
-
-
+    return render(request, 'product/delivery.html', {
+        'product':product,
+        'GOOGLE_MAPS_API_KEY': settings.GOOGLE_MAPS_API_KEY
+        })
 
 
 

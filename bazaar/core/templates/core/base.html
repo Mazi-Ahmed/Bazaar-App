@@ -7,19 +7,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" type="image/png" href="{% static 'images/bazaar app logo.png' %}">
     <title> {% block title %}{% endblock%} | Bazaar</title>
 </head>
 
-<body>
-    <nav class="py-2 px-6 flex items-center border-b border-gray-200 shadow-md">
+<body class="bg-white text-gray-800 dark:text-white">
+    <nav class="py-2 px-6 flex items-center border-b border-gray-200 shadow-md dark:border-gray-700">
         <div class="flex items-center">
             <a href="/" class="flex items-center">
-                <img src="{% static 'images/bazaar app logo.png' %}" alt="Bazaar Logo" class="h-7 mr-2"> 
-                <span class="text-lg font-semibold text-gray-800">Bazaar</span>            
+                <img src="{% static 'images/bazaar app logo.png' %}" alt="Bazaar Logo" class="h-7 mr-2">
+                <span class="text-lg font-semibold dark:text-white">Bazaar</span>
             </a>
         </div>
 
@@ -27,21 +27,18 @@
             <div class="space-x-6 inline-flex">
                 <a href="/"
                     class="flex items-center px-6 py-2 rounded-xl border-2 transition-colors duration-300 
-                        {% if active_page == 'home' %}border-indigo-500 text-indigo-500{% else %}border-transparent hover:border-indigo-400{% endif %}">
-                    <i
-                        class="fa-solid fa-house text-2xl" style="color:#989898"></i>
+                        {% if active_page == 'home' %}border-indigo-500 text-indigo-500{% else %}border-transparent hover:border-indigo-400{% endif %} dark:border-indigo-400">
+                    <i class="fa-solid fa-house text-2xl" style="color:#989898"></i>
                 </a>
                 <a href="{% url 'product:products' %}"
                     class="flex items-center px-6 py-2 rounded-xl border-2 transition-colors duration-300 
-                        {% if active_page == 'products' %}border-indigo-500 text-indigo-500{% else %}border-transparent hover:border-indigo-400{% endif %}">
-                    <i
-                        class="fa-solid fa-store text-2xl" style="color:#989898"></i>
+                        {% if active_page == 'products' %}border-indigo-500 text-indigo-500{% else %}border-transparent hover:border-indigo-400{% endif %} dark:border-indigo-400">
+                    <i class="fa-solid fa-store text-2xl" style="color:#989898"></i>
                 </a>
                 <a href="{% url 'product:new' %}"
                     class="flex items-center px-6 py-2 rounded-xl border-2 transition-colors duration-300 
-                        {% if active_page == 'new' %}border-indigo-500 text-indigo-500{% else %}border-transparent hover:border-indigo-400{% endif %}">
-                    <i
-                        class="fa-solid fa-square-plus text-2xl" style="color:#989898"></i>
+                        {% if active_page == 'new' %}border-indigo-500 text-indigo-500{% else %}border-transparent hover:border-indigo-400{% endif %} dark:border-indigo-400">
+                    <i class="fa-solid fa-square-plus text-2xl" style="color:#989898"></i>
                 </a>
             </div>
         </div>
@@ -55,14 +52,21 @@
             <a href="{% url 'dialogue:inbox' %}">
                 <i class="fa-solid fa-inbox text-2xl" style="color: #454ADE"></i>
             </a>
-            <a href="{% url 'userprofile:index' %}">
-                <i class="fa-sharp fa-solid text-2xl fa-user" style="color: #454ADE"></i>
+            <a href="{% url 'userprofile:index' %}" class="flex items-center">
+                {% if request.user.userprofile.profile_picture %}
+                    <img src="{{ request.user.userprofile.profile_picture.url }}" 
+                         alt="Profile Picture" 
+                         class="w-8 h-8 rounded-full object-cover border border-gray-300" />
+                {% else %}
+                    <i class="fa-sharp fa-solid text-2xl fa-user" style="color: #454ADE"></i>
+                {% endif %}
             </a>
             {% else %}
             <a href="{% url 'core:signup' %}"
-                class="px-6 py-3 text-lg font-semibold bg-blue-500 text-white rounded-xl hover:bg-blue-700">Sign Up</a>
+                class="px-3 py-2 text-md font-semibold bg-indigo-400 text-white rounded-xl hover:bg-indigo-500">Sign
+                Up</a>
             <a href="{% url 'core:login' %}"
-                class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Log In</a>
+                class="px-3 py-2 text-md font-semibold bg-gray-400 text-white rounded-xl hover:bg-gray-500">Log In</a>
             {% endif %}
         </div>
     </nav>
@@ -73,35 +77,36 @@
     </div>
 
     {% block footer %}
-    <footer class="py-6 px-6 flex justify-between items-center bg-gray-100">
+    <div class="spacer" style="height: 200px;"></div>
+    <footer class="py-6 px-6 flex justify-between items-center bg-gray-100 dark:bg-gray-800">
         <div class="flex items-center w-2/4 pr-10">
             <a href="/" class="flex items-center">
-                <img src="{% static 'images/bazaar app logo.png' %}" alt="Bazaar Logo" class="h-7 mr-2"> 
-                <span class="text-lg font-semibold text-gray-800">Bazaar</span>            
+                <img src="{% static 'images/bazaar app logo.png' %}" alt="Bazaar Logo" class="h-7 mr-2">
+                <span class="text-lg font-semibold text-gray-800">Bazaar</span>
             </a>
         </div>
-    
-        <div class="flex space-x-4">
-            <a href="#" class="text-lg" style="color:#454ADE">
-                <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a href="#" class="text-lg" style="color:#454ADE">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="#" class="text-lg" style="color:#454ADE">
+
+        <div class="flex space-x-2">
+            <a href="https://www.linkedin.com/in/mazidul-ahmed/" class="text-2xl" style="color:#454ADE">
                 <i class="fa-brands fa-linkedin"></i>
             </a>
-            <a href="#" class="text-lg" style="color:#454ADE">
+            <a href="https://github.com/Mazi-Ahmed" class="text-2xl" style="color:#454ADE">
                 <i class="fa-brands fa-github"></i>
             </a>
         </div>
-    
+
         <div class="w-1/3">
-            <h3 class="mb-5 font-semibold text-gray-500">More</h3>
+            <h3 class="mb-5 font-semibold text-gray-500 dark:bg-gray-400">More</h3>
             <ul class="space-y-2">
-                <li><a href="{% url 'core:contact' %}" class="text-indigo-500 hover:text-indigo-700">Contact</a></li>
-                <li><a href="#" class="text-indigo-500 hover:text-indigo-700">About</a></li>
-                <li><a href="#" class="text-indigo-500 hover:text-indigo-700">Sign up as a Driver</a></li>
+                <li><a href="{% url 'core:contact' %}"
+                        class="text-indigo-500 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300">Contact</a>
+                </li>
+                <li><a href="#"
+                        class="text-indigo-500 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300">About</a>
+                </li>
+                <li><a href="#"
+                        class="text-indigo-500 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300">Sign
+                        up as a Driver</a></li>
             </ul>
         </div>
     </footer>
@@ -112,30 +117,30 @@
             const toggleButton = document.getElementById('theme-toggle');
             const icon = document.getElementById('toggle-icon');
 
-            
             const currentTheme = localStorage.getItem('theme') || 'light';
             if (currentTheme === 'dark') {
-                document.body.classList.add('dark-mode');
+                document.body.classList.add('dark');
                 icon.classList.remove('fa-moon');
                 icon.classList.add('fa-sun');
+                console.log('Dark mode activated');
             }
 
             toggleButton.addEventListener('click', function () {
-                console.log("Toggle button clicked!"); 
-                document.body.classList.toggle('dark-mode');
-                if (document.body.classList.contains('dark-mode')) {
+                document.body.classList.toggle('dark');
+                if (document.body.classList.contains('dark')) {
                     localStorage.setItem('theme', 'dark');
                     icon.classList.remove('fa-moon');
                     icon.classList.add('fa-sun');
-                    console.log("Dark mode enabled");
+                    console.log('Switched to dark mode');
                 } else {
                     localStorage.setItem('theme', 'light');
                     icon.classList.remove('fa-sun');
                     icon.classList.add('fa-moon');
-                    console.log("Light mode enabled");
+                    console.log('Switched to light mode');
                 }
             });
         });
+
     </script>
 </body>
 

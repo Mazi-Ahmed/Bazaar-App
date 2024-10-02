@@ -14,16 +14,33 @@
     object-fit: cover;
 }
 
+.todays-picks img {
+    transition: transform 0.2s; 
+}
+
+.todays-picks img:hover {
+    transform: scale(1.05); 
+}
+
 .product-card {
     border-radius: 8px;
     overflow: hidden;
 }
 
-body.dark-mode {
-    background-color: rgba(0, 0, 0, 0.85) !important;
-    color: #ffffff !important;
+body.dark {
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white
 }
 
-body.dark-mode a {
-    color: #bb86fc; 
+
+body {
+    transition: background-color 0.5s, color 0.5s;
+}
+
+nav {
+    transition: background-color 0.5s, border-color 0.5s;
+}
+
+footer {
+    transition: background-color 0.5s;
 }

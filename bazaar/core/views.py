@@ -3,12 +3,14 @@ from product.models import Category, Product
 from .forms import Signup
 
 def index(request):
-    products = Product.objects.filter(item_sold=False)[0:6]
+    products = Product.objects.filter(item_sold=False)[0:15]
     categories = Category.objects.all()
+    free_products = Product.objects.filter(price=0, item_sold=False)
     
     return render(request, 'core/index.html', {
         'categories': categories,
         'products': products,
+        'free_products': free_products,
     })
 
 def contact(request):

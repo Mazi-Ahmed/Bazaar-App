@@ -4,15 +4,15 @@
 
 {% block content %}
 
-<div class="flex pt-10 pb-10 items-center justify-center">
+<div class="flex pt-14 pb-10 items-center justify-center">
     <img src="{% static 'images/bazaar stars.png' %}" alt="Bazaar Stars" class="h-36 mr-8">
 
     <div class="text-center">
-        <h1 class="text-8xl font-bold">
+        <h1 class="text-8xl font-bold dark:text-white">
             Buy. Sell.<br>
-            <span class="text-[#454ade]">Deliver.</span>
+            <span class="text-indigo-500">Deliver.</span>
         </h1>
-        <h3 class="mt-2 text-xl font-semibold">All in your local neighborhood.</h3>
+        <h3 class="mt-2 text-xl font-semibold dark:text-white">All in your local neighborhood.</h3>
     </div>
 
     <img src="{% static 'images/handshake.png' %}" alt="Handshake" class="h-56 mx-6">
@@ -20,8 +20,8 @@
     <img src="{% static 'images/bazaar stars.png' %}" alt="Bazaar Stars" class="h-36 ml-4">
 </div>
 
-<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
-    <h2 class="mb-6 text-2xl font-semibold">Today's Picks 🗓️</h2>
+<div class="mt-6 px-6 py-12 bg-gray-100 dark:bg-gray-800 rounded-xl todays-picks">
+    <h2 class="mb-6 text-2xl font-semibold text-gray-800 dark:text-gray-200">Today's Picks 🗓️</h2>
 
     <div class="overflow-x-auto">
         <div class="flex space-x-4">
@@ -34,8 +34,14 @@
                         <img src="{% static 'path/to/default/image.png' %}" class="border w-full h-32 rounded-xl object-cover">  
                     {% endif %}
                     <div class="mt-2 text-center">
-                        <h3 class="text-lg font-semibold">{{ product.name }}</h3>
-                        <p class="text-gray-500">${{ product.price }}</p>
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{ product.name }}</h3>
+                        <p class="text-gray-500 dark:text-gray-400">
+                            {% if product.price == 0 %}
+                                Free
+                            {% else %}
+                                ${{ product.price }}
+                            {% endif %}  
+                        </p>                  
                     </div>
                 </a>
             </div>
@@ -50,9 +56,9 @@
         {% for category in categories %}
         <div>
             <a href="{% url 'product:products' %}?query={{ query }}&category={{ category.id }}">
-                <div class="p-3 bg-white text-center rounded-xl transition duration-200 hover:bg-gray-100">
+                <div class="p-3 bg-white text-center rounded-xl transition duration-200 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600">
                     <i class="{{ category.icon_class }} text-2xl mb-2" style="color: #454ade;"></i>
-                    <h3 class="text-l">{{ category.name }}</h3>
+                    <h3 class="text-l text-gray-800 dark:text-gray-200">{{ category.name }}</h3>
                 </div>
             </a>
         </div>
@@ -60,34 +66,39 @@
     </div>
 </div>
 
-<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
-    <h2 class="mb-6 text-2xl font-semibold">Free Items 🎉</h2>
-
+<div class="mt-6 px-6 py-12 bg-gray-100 dark:bg-gray-800 rounded-xl todays-picks">
+    <h2 class="mb-6 text-2xl font-semibold text-gray-800 dark:text-gray-200">Free Items 🎉</h2>
     <div class="overflow-x-auto">
         <div class="flex space-x-4">
             {% for product in free_products %}
                 <div class="flex-shrink-0 w-40">
                     <a href="{% url 'product:detail' product.id %}">
-                        {% if product.images.exists %}
-                            <img src="{{ product.images.first.image.url }}" class="border w-full h-32 rounded-xl object-cover">
-                        {% else %}
-                            <p class="text-center">No image available</p>
-                        {% endif %}
+                        <img src="{{ product.images.first.image.url }}" class="border w-full h-32 rounded-xl object-cover">
                         <div class="mt-2 text-center">
-                            <h3 class="text-lg font-semibold">{{ product.name }}</h3>
-                            <p class="text-gray-500">Free</p>
+                            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{ product.name }}</h3>
+                            <p class="text-gray-500 dark:text-gray-400">Free</p>
                         </div>
                     </a>
                 </div>
             {% empty %}
                 <div class="flex-shrink-0 w-40">
-                    <p>No free items available.</p>
+                    <p class="text-gray-500 dark:text-gray-400">No free items available.</p>
                 </div>
             {% endfor %}
         </div>
     </div>
 </div>
 
-
+<div class="pt-12 flex items-center justify-center">
+    <img src="{% static 'images/bazaar car .png' %}" alt="Car" class="h-80 mx-6">
+    
+    <div class="text-center">
+        <h1 class="text-7xl font-bold text-gray-800 dark:text-white">
+            We Deliver To
+            <span class="text-indigo-500">You.</span>
+        </h1>
+        <h3 class="mt-2 text-lg font-semibold text-gray-600 dark:text-gray-300">Bringing convenience to your doorstep.</h3>
+    </div>
+</div>
 
 {% endblock %}
