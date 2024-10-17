@@ -2,7 +2,7 @@
 
 from django.db import migrations, models
 
-def populate_icon_classes(apps):
+def populate_icon_classes(apps, schema_editor):
     Category = apps.get_model('product', 'Category')
 
     icons = {
