@@ -2,5 +2,5 @@
 pip install -r bazaar/deps.txt
 
 # Run Migration
-python manage.py migrate
+python bazaar/manage.py migrate
 
