@@ -29,7 +29,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "2345242LEK4")
 GOOGLE_MAPS_API_KEY = config('GOOGLE_MAPS_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'RENDER' not in os.environ
+# DEBUG = 'RENDER' not in os.environ
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
