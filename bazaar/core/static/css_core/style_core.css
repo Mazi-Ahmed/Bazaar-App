@@ -1,0 +1,46 @@
+.image-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 75%; 
+    overflow: hidden;
+}
+
+.product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.todays-picks img {
+    transition: transform 0.2s; 
+}
+
+.todays-picks img:hover {
+    transform: scale(1.05); 
+}
+
+.product-card {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+body.dark {
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white
+}
+
+
+body {
+    transition: background-color 0.5s, color 0.5s;
+}
+
+nav {
+    transition: background-color 0.5s, border-color 0.5s;
+}
+
+footer {
+    transition: background-color 0.5s;
+}
